@@ -13,7 +13,14 @@ namespace XamarinAssignment.iOS
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            // Perform any additional setup after loading the view, typically from a nib.
+            Title = "Users List";
+
+            NavigationItem.RightBarButtonItem = new UIBarButtonItem("+", UIBarButtonItemStyle.Plain, AddUser);
+        }
+
+        private void AddUser(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         public override void DidReceiveMemoryWarning()
