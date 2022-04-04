@@ -25,7 +25,7 @@ namespace XamarinAssignment.iOS
 
         private void AddUser(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            this.NavigationController.PushViewController(new AddUserViewController(), true);
         }
 
         public override void DidReceiveMemoryWarning()
