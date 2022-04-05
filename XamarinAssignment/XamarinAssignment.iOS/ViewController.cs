@@ -7,7 +7,7 @@ namespace XamarinAssignment.iOS
 {
     public partial class ViewController : UIViewController
     {
-        public List<UserModel> userList = new List<UserModel>();
+        public List<UserModel> _userList = new List<UserModel>();
         public ViewController(IntPtr handle) : base(handle)
         {
         }
@@ -16,16 +16,24 @@ namespace XamarinAssignment.iOS
         {
             base.ViewDidLoad();
             Title = "Users List";
-            userList.Add(new UserModel { Email = "User@test.com", Name = "User1" });
-            userList.Add(new UserModel { Email = "User@email.com", Name = "User2" });
-            Source source = new Source(userList);
+            _userList.Add(new UserModel { Email = "User@test.com", Name = "User1" });
+            _userList.Add(new UserModel { Email = "User@email.com", Name = "User2" });
+            Source source = new Source(_userList);
             ListView.Source = source;
             NavigationItem.RightBarButtonItem = new UIBarButtonItem("+", UIBarButtonItemStyle.Plain, AddUser);
         }
 
         private void AddUser(object sender, EventArgs e)
         {
-            this.NavigationController.PushViewController(new AddUserViewController(), true);
+            var vc = new AddUserViewController();
+            vc.OnSubmitSucceed = ((obj) =>
+            {
+                var user = new UserModel { Email = obj.Email, Name = obj.Name };
+                _userList.Add(user);
+                ListView.ReloadData();
+
+            });
+            this.NavigationController.PushViewController(vc, true);
         }
 
         public override void DidReceiveMemoryWarning()
