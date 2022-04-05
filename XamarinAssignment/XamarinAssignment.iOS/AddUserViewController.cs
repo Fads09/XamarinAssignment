@@ -40,8 +40,6 @@ namespace XamarinAssignment.iOS
 
         public void SaveCredentials()
         {
-            Preferences.Set("Name", NameEntry.Text);
-            Preferences.Set("Email", EmailEntry.Text);
             ValidatePassword();
         }
 
